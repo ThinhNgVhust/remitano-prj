@@ -19,7 +19,6 @@ api_version = "v3"
 DEVELOPER_KEY = "AIzaSyCy4oWmtMKr1JqY6HZftcKs_HeBnhQs7DA"
 youtube = googleapiclient.discovery.build(api_service_name, api_version, developerKey = DEVELOPER_KEY)
 def index(request):
-    
     moives =list(Movie.objects.all().order_by("-timestamp"))
     to_respone = []
     for movie in moives:
@@ -50,9 +49,12 @@ def insert(request):
             response = request_youtube.execute()
             title = response["items"][0]["snippet"]["title"]
             description = response["items"][0]["snippet"]["description"]
+            print(title)
+            print(description)
+            print("Shared by: ", user.email)
         except:
             JsonResponse({"message":"Not found"},status = 401)
-    return JsonResponse({"message":"Uploaded succesfully","title":title,"description":description,"creator":user.email,"link":linkId},status = 200)
+    return JsonResponse({"message":"Uploaded succesfully","title":title,"description":description,"creator":user.email,"linkId":linkId},status = 200)
 
 def login_view(request):
     if request.method == "POST":

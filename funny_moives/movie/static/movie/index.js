@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded",()=>{
                   description = data["description"];
                   creator_mail = data["creator"];
                   linkId = data["linkId"];
-                  appendElement(title,description.creator_mail,linkId);
+                  console.log(title,description,creator_mail,linkId);
+                  appendElement(title,description,creator_mail,linkId);
+                  
                   document.querySelector("#youtubeLink").value ="";
                   return false;
                 })

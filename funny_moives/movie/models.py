@@ -4,7 +4,6 @@ from django.db import models
 # Create your models here.
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
-    movies = models.ManyToManyField("Movie",blank=True,related_name="who_posted")#find user with alias: who_posted
     def __str__(self) -> str:
         return f"{self.id} {self.username}"
     pass
