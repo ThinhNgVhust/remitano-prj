@@ -8,33 +8,69 @@
         <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
     </head>
     <body>
-        <h1>Funny Movies</h1>
-        <div>
+            <div class="col"><h2>Funny Movies</h2></div>
             {% if user.is_authenticated %}
-                Signed in as <strong>{{ user.username }}</strong>.
+            Welcome <strong>{{ user.username }}</strong>.
+            <div class="col">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shareMovie">
+                    Share a movie
+                </button>
+            <a type="button" class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+            </div>  
             {% else %}
-                Not signed in.
+            <form action="{% url 'login' %}" method="post" class="form-inline" >
+                {% csrf_token %}
+                <div class="form-group mb-2">
+                  <label for="staticEmail2" class="sr-only">Email</label>
+                  <input type="text"  class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                  <label for="inputPassword2" class="sr-only">Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Login</button>
+            </form>
+              
+                Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+                <!-- <a class="nav-link" href="{% url 'login' %}">Log In</a> -->
+            </li>
+            <div>
             {% endif %}
         </div>
-        <ul class="nav">
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Share a movie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-            {% endif %}
-        </ul>
         <hr>
         {% block body %}
         {% endblock %}
+    <!--Data toggle -->
+    <!-- Modal -->
+    <div class="modal fade" id="shareMovie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Share a Youtube Movie</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="md-form mb-5">
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <label data-error="wrong" data-success="right" for="orangeForm-name">Link:</label>
+                    <input type="text" id="youtubeLink" class="form-control validate">
+                </div>
+                <div class="md-form mb-5">
+                    <button type="button" class="btn btn-primary" id="btnShareLink">Save</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+            
+            
+            </div>
+        </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'movie/index.js' %}"></script>
     </body>
 </html>

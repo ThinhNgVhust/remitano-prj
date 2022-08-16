@@ -4,6 +4,9 @@ from .models import *
 class UserAdmin(admin.ModelAdmin):
     list_display=("id","username","email")
 class MovieAdmin(admin.ModelAdmin):
-    list_display=("id","creator","timestamp","content")
+    list_display=("id","creator","timestamp")
+class MovieViewAdmin(admin.ModelAdmin):
+    list_display=("title","creator_mail")
 admin.site.register(User,UserAdmin)
 admin.site.register(Movie,MovieAdmin)
+admin.site.register(MovieView,MovieViewAdmin)
