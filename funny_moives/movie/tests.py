@@ -50,4 +50,3 @@ class MovieTestCase(TestCase):
         c = Client()
         response = c.get('') #go to index
         self.assertEqual(response.status_code,200)
-   
