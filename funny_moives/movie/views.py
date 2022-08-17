@@ -40,6 +40,7 @@ def insert(request):
     if request.method=="POST":
         data = json.loads(request.body)
         linkId = data["link"]
+        print(request.user.id)
         user = User.objects.get(pk = request.user.id)
         movie = Movie(creator=user,link=linkId)
         movie.save()
